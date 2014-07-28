@@ -13,7 +13,7 @@ Make complex replacements with regular expression<br>
 In the replace expression, you can write replace function inside the plain string(they will be concatenated into a new string)<br>
 The form of function is:<br>
 <b>$function name(arg1,arg2,arg3)</b><br>
-<b>$function name[alias](arg1,arg2,arg3)</b>(the 'alias' is related to function 'Ref' and 'StcRef')<br>
+<b>$function name\[alias\](arg1,arg2,arg3)</b>(the 'alias' is related to function 'Ref' and 'StcRef')<br>
 <br>
 If you want to write special character, like '$', you should put a escape character '\' ahead of it. <br>
 If you write nothing in the position of a parameter, it will get an empty string rather than 'null'<br>
