@@ -37,20 +37,7 @@ import java.util.concurrent.locks.LockSupport;
  * cancel your calculation if you detect that the method 'isWorking' returns false, call
  * the method 'updateParametersVersion' once the data has changed, call the method
  * 'update' or 'updateAndWait' to launch the calculation if you want to get the result.
- * 
- * <p>一个最新结果计算框架，允许多个线程并发的提交计算请求，它的目的是计算最新结果，同时
- * 竭尽所能地减少不必要的计算，如：在计算过程中发现有新的请求，则取消当前计算，执行新的计算
- * (需在calculateResult的实现里用isWorking检查当前状态)；可设置计算延时，减少频繁提交带来的
- * 不必要计算；除updateAndWait外，均为<u><b>wait-free级别的无阻塞</b></u>实现，大幅提升性能
- * <p><b>不变约束</b>：
- * <li>如果不被取消(stopCurrentWorking),则update、updateAndWait后，框架一定会计算出一个不
- * 旧于调用瞬间的参数的结果(此过程可能被无限延长，当有无限个小间隔(短于计算所用时间+延时)的
- * 提交时，如果需要，可以通过设置一个不小于0的delayUpperLimit，限制最长延迟来避免此问题)，而
- * updateAndWait的返回，一定是紧接着此结果的计算完成(在没有超时和取消的前提下)
- * <p><b>使用方法</b>：
- * 继承LatestResultsProvider并将具体计算过程写在calculateResult的实现中，在实现中可通过调用
- * isWorking来判断当前计算是否已被取消，来做出取消计算的响应；在更新参数后，必需接着调用
- * updateParametersVersion方法
+ *
  * @author trytocatch@163.com
  * @date 2013-2-2
  */
