@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>
+自定义函数说明
+</TITLE>
+
+<META NAME="date" CONTENT="2013-07-16">
+
+</HEAD>
+
+<BODY BGCOLOR="lightgray">
+<h2>自定义函数说明</h2>
+如果想实现自己的函数，请先创建一个项目，引入该jar包，然后继承trytocatch.regexreplacer.model.expression.FuncNode类，并且该类必需在trytocatch.regexreplacer.model.expression.funcs包下<br>
+<br>
+参考如下：<br>
+<pre>
+package trytocatch.regexreplacer.model.expression.funcs;
+
+import trytocatch.regexreplacer.model.expression.FuncNode;
+
+public class FuncXXX extends FuncNode {
+	public FuncXXX(Object[] args) {
+		super(args, cacheSupported);
+	}
+
+	@Override
+	protected boolean checkArgsLength(int count) {
+		return false;
+	}
+
+	@Override
+	protected Object workOut(Object[] realArgs) {
+		return null;
+	}
+}
+</pre>
+说明：<br>
+1、XXX表示函数名，为了避免跟java的关键字冲突，所以类名必需带上Func前缀。<br>
+<br>
+2、必需提供一个参数为(Object[] args)的构造方法。否则自动创建对象的时候会报错。<br>
+<br>
+3、cacheSupported表示，在参数相同的情况下，该函数是不是返回相同的结果，如果是，则系统会在适当的情况下使用缓存值。<br>
+<br>
+4、checkArgsLength方法是用来检查参数个数的，请在此判断count是不是合法的参数个数，不合法时应返回false。<br>
+<br>
+5、workOut是具体执行函数功能的方法，参数是一个Object数组，所以要考虑各种类型的参数。需要注意一点，如果函数里填写的参数是Seq，则调用workOut时，该Seq已经被调用过一次了，realArgs里是序列的具体值。<br>
+<br>
+6、为了便于统一处理，数字只使用两种:Long和Double。<br>
+<br>
+注意：由于一些原因，即使表达式中未给函数传参数，实际上也会传入一个空字符串，所以判断的时候不要使用return count == 0。<br>
+<br>
+编写好后，将该类的class文件放到jar包（jar其实是一个zip文件，可以修改）里的trytocatch/regexreplacer/model/expression/funcs目录下，运行新的jar，就可以使用自已定义的函数了
+</BODY>
+</HTML>

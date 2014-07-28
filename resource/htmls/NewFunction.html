@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>
+custom function guidance
+</TITLE>
+
+<META NAME="date" CONTENT="2013-07-16">
+
+</HEAD>
+
+<BODY BGCOLOR="lightgray">
+<h2>Custom function guidance</h2>
+At first, create a java project, and import this jar, add it to build path, then create a class extends 'trytocatch.regexreplacer.model.expression.FuncNode', and this class must be inside the package 'trytocatch.regexreplacer.model.expression.funcs'<br>
+here is a example:<br>
+<pre>
+package trytocatch.regexreplacer.model.expression.funcs;
+
+import trytocatch.regexreplacer.model.expression.FuncNode;
+
+public class FuncXXX extends FuncNode {
+	public FuncXXX(Object[] args) {
+		super(args, cacheSupported);
+	}
+
+	@Override
+	protected boolean checkArgsLength(int count) {
+		return false;
+	}
+
+	@Override
+	protected Object workOut(Object[] realArgs) {
+		return null;
+	}
+}
+</pre>
+Description:<br>
+1. XXX is the function name, in order to avoid the conflict with the reserved Java keyword, the class name must start with 'Func'.<br>
+<br>
+2. 'cacheSupported' indicate that whether it returns the same value with same parameters, if it's true then the system will use a cached value in proper situation.<br>
+<br>
+3. Must provides a constructor 'public FuncXXX(Object[] args)', and call the super constructor with the 'args' passed in<br>
+<br>
+4. 'checkArgsLength' is the function to check the count of the parameters, you should return false while it's invalid<br>
+<br>
+5. 'workOut' is the actual place to do things. Because the parameter is a Object array, so you need to consider all situation of parameter's type. If you put a function(like 'Seq') as a parameter for a function in replace expression, the actual value will pass to here.<br>
+<br>
+6. In order to handle things uniformly and simply, there is only two types for number, Double and Long.<br>
+<br>
+7. For some reasons, even though you didn't pass any parameter for a function in you replace expression, there is a empty string be actually passed in. So you should never write this code 'return count == 0' in check function 'checkArgsLength'.<br>
+<br>
+In the end, compile this class and put the file 'FuncXXX.class' into the jar file(put it into the director 'trytocatch/regexreplacer/model/expression/funcs', jar is a zip formatted file, it's easy to modify).<br>
+Now every thing has done, you can execute the new jar and use your own function in replace expression.<br>
+</BODY>
+</HTML>

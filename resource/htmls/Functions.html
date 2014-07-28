@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>
+replace functions 
+</TITLE>
+
+<META NAME="date" CONTENT="2013-07-16">
+
+</HEAD>
+
+<BODY BGCOLOR="lightgray">
+<p><b>Note:</b>If a function always returns the same value with same parameters, we call it 'static function'(e.g. Add, Char, ParseLong), otherwise we call it 'dynamic function'(e.g. Seq, AbsRow, Ref, StcRef).<br>
+<hr>
+<p>
+<b>Function: Add</b><br>
+<b>Alias: </b>+<br>
+<b>Parameters: </b>number<br>
+<b>The number of parameters: </b>great than or equal to 1<br>
+<b>Description: </b>return a + b + c +...<br>
+<hr>
+<p>
+<b>Function: Subtract</b><br>
+<b>Alias: </b>-<br>
+<b>Parameters: </b>number<br>
+<b>The number of parameters: </b>2<br>
+<b>Description: </b>return a - b<br>
+<hr>
+<p>
+<b>Function: Multiply</b><br>
+<b>Alias: </b>*<br>
+<b>Parameters: </b>number<br>
+<b>The number of parameters: </b>great than or equal to 1<br>
+<b>Description: </b>return a * b * c *...<br>
+<hr>
+<p>
+<b>Function: Divide</b><br>
+<b>Alias: </b>/<br>
+<b>Parameters: </b>number<br>
+<b>The number of parameters: </b>2<br>
+<b>Description: </b>return a / b<br>
+<hr>
+<p>
+<b>Function: Mod</b><br>
+<b>Alias: </b>%<br>
+<b>Parameters: </b>number(decimals allowed)<br>
+<b>The number of parameters: </b>2<br>
+<b>Description: </b>return a mod b<br>
+<hr>
+<p>
+<b>Function: Char</b><br>
+<b>Parameters: </b>number<br>
+<b>The number of parameters: </b>1<br>
+<b>Description: </b>convert the denary Unicode number to character<br>
+<hr>
+<p>
+<b>Function: Asc</b><br>
+<b>Parameters: </b>character or anything(convert to String and pick out the first character)<br>
+<b>The number of parameters: </b>1<br>
+<b>Description: </b>convert the character to denary Unicode number<br>
+<hr>
+<p>
+<b>Function: ParseLong</b><br>
+<b>Parameters: </b>number, the second one is denary<br>
+<b>The number of parameters: </b>1 or 2<br>
+<b>Description: </b>parses the first parameter as a long in the radix specified by the second argument(or 10 while there is no second parameter)<br>
+<hr>
+<p>
+<b>Function: Nvl</b><br>
+<b>Parameters: </b>any<br>
+<b>The number of parameters: </b>2 or 3<br>
+<b>Description: </b>if the first parameter isn't null then return the first parameter(or return the second one while it has three parameters), otherwise return the second parameter(or return the third one while it has three parameters)(1. the first calling of StcRef will return null. 2.when regular expression is '(a)|(b)' and content is 'a', the second capturing group will return null)<br>
+<hr>
+<p>
+<b>Function: Iif</b><br>
+<b>Parameters: </b>any<br>
+<b>The number of parameters: </b>4<br>
+<b>Description: </b>if the first parameter equals to the second parameter, then returns the third parameter, otherwise returns the forth parameter. This function is special treated, there is no effect on the unreturned parameter(e.g. function 'Seq')<br>
+<hr>
+<p>
+<b>Function: Format</b><br>
+<b>Parameters: </b>the first one is String, any for others<br>
+<b>The number of parameters: </b>great than or equal to 1<br>
+<b>Description: </b>format the string, just like the java method: String.format(String format, Object... args)(note: you needn't to put a pair of quotes for the first parameter. If you want to pass a numeric parameter, you may need to use function 'Add' to convert a string to a number)<br>
+e.g. 1. $Format(%f,$Add(3.4))<br>2. $Format(%d,$Add(34))<br>
+<hr>
+<p>
+<b>Function: Lower</b><br>
+<b>Parameters: </b>any<br>
+<b>The number of parameters: </b>1<br>
+<b>Description: </b>Converts all of the characters in this string to lower case<br>
+<hr>
+<p>
+<b>Function: Upper</b><br>
+<b>Parameters: </b>any<br>
+<b>The number of parameters: </b>1<br>
+<b>Description: </b>Converts all of the characters in this string to upper case<br>
+<hr>
+<p>
+<b>Function: AbsRow</b><br>
+<b>Parameters: </b>none<br>
+<b>The number of parameters: </b>none<br>
+<b>Description: </b>return the absolute row number(different from 'Seq')<br>
+<hr>
+<p>
+<b>Function: (empty)</b><br>
+<b>Parameters: </b>String(for named-capturing group) or Number<br>
+<b>The number of parameters: </b>1<br>
+<b>Description: </b>return the assigned capturing group(named-capturing group is available with jre 1.7 or later)<br>
+<hr>
+<p>
+<b>Function: Ref</b><br>
+<b>Parameters: </b>number(the serial number of function appears from left to right, starts at 1) or string(temporary function alias, e.g. '$[myalias1]Seq(1,1)'). The reference be binded on its initialization, so dynamic parameter may makes no sense.<br>
+<b>The number of parameters: </b>1<br>
+<b>Description: </b>a dynamic reference, returns the dynamic value of the referenced function. If the referenced function is a dynamic one, like 'Seq', it will generates and returns the next value(this doesn't effect 'StcRef', it will still return the original value)<br>
+<hr>
+<p>
+<b>Function: StcRef</b><br>
+<b>Parameters: </b>be same as Ref<br>
+<b>The number of parameters: </b>1<br>
+<b>Description: </b>a static reference, returns the same value as it returns before. If the referenced function is a dynamic one, like 'Seq', it won't generates the next value.<br>
+<hr>
+<p>
+<b>Function: Seq</b><br>
+<b>Parameters: </b>number(dynamic one is OK, e.g. Seq, AbsRow)<br>
+<b>The number of parameters: </b>2 or 3<br>
+<b>return value: </b><br>current initial value + current step increment * (called times - 1), the type of the return value depends on the types of current initial value and current step increment.<br>
+<b>Parameters description: </b>1.initial value 2.step increment 3. reset threshold(optional)<br>
+<b>Description: </b>This is a sequence generator, on its initialization or reset, it will generates two or three current value(current initial value, current step increment, current reset threshold(optional)), replace the old values and reset the called times to 0. If there is a reset threshold and the next value will greater than or less than(depends on the sign of the current step increment, note that the decimals may not accurately represents) the current reset threshold, the sequence generator will be reset, the parameters only be read on initialization or reset<br>
+<hr>
+</BODY>
+</HTML>
