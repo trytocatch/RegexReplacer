@@ -29,20 +29,23 @@ public class RegexController extends LatestResultsProvider implements Controller
 	private volatile boolean liveUpdate;
 	private volatile ExpressionParser parser;
 	
-	private volatile Object replacer = "";
-	private volatile Pattern pattern;
-	private volatile Matcher matcher;
-	private volatile boolean expressionAvailable;
+	/**it's visible in getRealReplaceResult(happens-before rules in updateAndWait
+	 * and barrier.nextCycle)
+	 */
+	private Object replacer = "";
+	private Pattern pattern;
+	private Matcher matcher;
+	private boolean expressionAvailable;
 	
-	private volatile String textCache = "";
-	private volatile String expressionCache = "";
-	private volatile String regexCache = "";
-	private volatile int patternFlag = 0;
+	private String textCache = "";
+	private String expressionCache = "";
+	private String regexCache = "";
+	private int patternFlag = 0;
 
-	private volatile boolean replaceExpressionChanged;
-	private volatile boolean patternChanged;
+	private boolean replaceExpressionChanged;
+	private boolean patternChanged;
 	
-	private volatile List<MatchResultInfo> result;
+	private List<MatchResultInfo> result;
 	private int absRowNum;//no volatile
 
 
