@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.undo.UndoManager;
@@ -24,8 +25,17 @@ import trytocatch.swingplus.text.LineLabel;
  * @date 2012-12-27
  */
 public class RegexReplacer {
-	@SuppressWarnings({ "deprecation", "serial" })
 	public static void main(String[] a) {
+		SwingUtilities.invokeLater(new Runnable(){
+			@Override
+			public void run() {
+				start();
+			}
+		});
+	}
+	
+	@SuppressWarnings({ "deprecation", "serial" })
+	private static void start(){
 		try {
 			UIManager
 					.setLookAndFeel(new com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel());
