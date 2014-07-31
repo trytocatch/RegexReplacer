@@ -32,12 +32,22 @@ import java.util.concurrent.locks.LockSupport;
  * <p>
  * The methods except 'updateAndWait' are nonblocking at <b>wait-free</b> level.
  * <p>
+ * As described in 'Package java.util.concurrent.atomic Description':<br>
+ * compareAndSet and all other read-and-update operations such as getAndIncrement have
+ * the memory effects of both reading and writing volatile variables.<br>
+ * So there is no thread-safe problem if you call 'updateParametersVersion' after changing
+ * the data, the new data will be visible at 'calculateResult' even through there is no
+ * synchronization has been made.<br>
+ * 
+ * 'updateParametersVersion' <b>happens-before</b> the worker thread enter 'calculateResult' in
+ * its turn.
+ * <p>
  * How to use it:<br>
  * Implement the abstract method 'calculateResult' to do your calculation with your data,
  * cancel your calculation if you detect that the method 'isWorking' returns false, call
  * the method 'updateParametersVersion' once the data has changed, call the method
  * 'update' or 'updateAndWait' to launch the calculation if you want to get the result.
- *
+ * 
  * @author trytocatch@163.com
  * @date 2013-2-2
  */
