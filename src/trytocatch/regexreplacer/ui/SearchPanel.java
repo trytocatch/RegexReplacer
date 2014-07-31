@@ -407,7 +407,7 @@ public class SearchPanel extends JPanel implements ResultObserver {
 			if (regexController.update() == RegexController.UPDATE_COMMITTED
 					|| isResultDisplayed == false) {
 				statsLabel.setText(StrUtils
-						.getStr("SearchPanel.replacingCanceled£¡"));
+						.getStr("SearchPanel.replacingCanceled"));
 				return;
 			} else {
 				result = resultTableModel.getAllData();
@@ -428,13 +428,13 @@ public class SearchPanel extends JPanel implements ResultObserver {
 					result = regexController.getRealReplaceResult(indexes);
 					if (isResultDisplayed == false) {
 						statsLabel.setText(StrUtils
-								.getStr("SearchPanel.replacingCanceled£¡"));
+								.getStr("SearchPanel.replacingCanceled"));
 						return;
 					}
 
 				} catch (Exception e) {
 					statsLabel.setText(StrUtils
-							.getStr("SearchPanel.replacingCanceled£¡"));
+							.getStr("SearchPanel.replacingCanceled"));
 					return;
 				}
 		}
