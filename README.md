@@ -2,6 +2,8 @@ RegexReplacer
 =============
 (中文介绍请看这：http://www.cnblogs.com/trytocatch/p/RegexReplacer.html)
 
+You can get the executable jar from [here](https://github.com/trytocatch/RegexReplacer/raw/master/executable%20jar/RegexReplacer.jar), and of course, you need a jre to execute it.
+
 <h2>Major functions:</h2>
 Make complex replacements with regular expression<br>
 <h2>Characteristic:</h2>
