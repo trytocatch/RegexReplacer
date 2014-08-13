@@ -161,7 +161,12 @@ public static final byte TYPEB = 2;
 public static final byte TYPEC = 4;
 public static final byte TYPED = 8;
 ```
-**Solution:**
+**Solution:**copy
+```
+typea,typeb,typec,typed
+```
+into content box and input
+
 *regular expression:*
 ```
 \w+
@@ -169,6 +174,7 @@ public static final byte TYPED = 8;
 *replace expression:*
 ```
 public static final byte $Upper($(0)) = $Iif[tv]($*[v]($StcRef(tv),2),0,1,$StcRef(v));
+
 ```
 
 check the check box 'replacement only', then click the button 'replace all'
