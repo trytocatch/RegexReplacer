@@ -25,7 +25,7 @@ import java.util.concurrent.locks.LockSupport;
  * If the calculation is hard to cancel, and the data changes frequently, you can use
  * 'setUpdateDelay' to delay the launch of the calculation. But this will lead to another
  * issue(or you may not think it is an issue), the data changes so frequently that the
- * calculation never be launched because the its interval is less than 'UpdateDelay'.
+ * calculation never be launched because its interval is less than 'UpdateDelay'.
  * If you think it is an issue, you can use 'setDelayUpperLimit' to avoid it. If the sum
  * of all 'UpdateDelay' greater than 'DelayUpperLimit', the delay mechanism will be
  * disabled for this time.
