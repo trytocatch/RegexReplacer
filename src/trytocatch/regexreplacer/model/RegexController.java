@@ -265,20 +265,36 @@ public class RegexController extends LatestResultsProvider implements Controller
 	}
 	
 	private void reParseReplaceExpression() {
+		replaceExpressionChanged = false;
 		observers.clear();
 		if (expressionAvailable)
-			replacer = parser.parse(expressionCache);
+			try {
+				replacer = parser.parse(expressionCache);
+			} catch (Throwable t) {
+				replaceExpressionChanged = true;
+				if (t instanceof Error)
+					throw (Error) t;
+				else if (t instanceof RuntimeException)
+					throw (RuntimeException) t;
+			}
 		else
 			replacer = expressionCache == null ? "" : expressionCache;
-		replaceExpressionChanged = false;
 	}
 
 	private void reBuildPattern() {
+		patternChanged = false;
 		if (regexCache.isEmpty())
 			pattern = null;
 		else
-			pattern = Pattern.compile(regexCache, patternFlag);
-		patternChanged = false;
+			try{
+				pattern = Pattern.compile(regexCache, patternFlag);
+			}catch(Throwable t){
+				patternChanged = true;
+				if(t instanceof Error)
+					throw (Error)t;
+				else if(t instanceof RuntimeException)
+					throw (RuntimeException)t;
+			}
 	}
 
 	private void reset() {
