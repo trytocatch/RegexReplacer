@@ -44,9 +44,11 @@ import java.util.concurrent.locks.LockSupport;
  * <p>
  * How to use it:<br>
  * Implement the abstract method 'calculateResult' to do your calculation with your data,
- * cancel your calculation if you detect that the method 'isWorking' returns false, call
- * the method 'updateParametersVersion' once the data has changed, call the method
- * 'update' or 'updateAndWait' to launch the calculation if you want to get the result.
+ * call 'fireCalculationFailed' while calculation failed and no Throwalbe be thrown by 
+ * 'calculateResult', cancel your calculation if you detect that the method 'isWorking'
+ * returns false, call the method 'updateParametersVersion' once the data has changed,
+ * call the method 'update' or 'updateAndWait' to launch the calculation if you want to
+ * get the result.
  * 
  * @author trytocatch@163.com
  * @date 2013-2-2
@@ -147,7 +149,7 @@ public abstract class LatestResultsProvider {
 									barrier.nextCycle(workingVersion);
 							} catch (Throwable t) {
 								t.printStackTrace();
-								workState.set(WS_CANCELED);
+								fireCalculationFailed();
 							}
 						}
 					} catch (InterruptedException e) {
@@ -183,10 +185,6 @@ public abstract class LatestResultsProvider {
 	 */
 	public void setDelayUpperLimit(int delayUpperLimit) {
 		this.delayUpperLimit = delayUpperLimit;
-	}
-	
-	public final void stopCurrentWorking() {
-		workState.set(WS_CANCELED);
 	}
 
 	/**
@@ -251,8 +249,22 @@ public abstract class LatestResultsProvider {
 				workState.compareAndSet(WS_WORKING, WS_NEW_TASK);
 	}
 	
+	public final void stopCurrentWorking() {
+		workState.set(WS_CANCELED);
+	}
+	
 	/**
 	 * implement this to deal with you task
 	 */
 	protected abstract void calculateResult();
+	
+	/**
+	 * If 'calculate the result' failed and no Throwable be thrown by
+	 * 'calculateResult', calls this to let it know so that isResultUptodate()
+	 * won't become true. If a Throwable be thrown by 'calculateResult', this
+	 * tool will catch it and call 'fireCalculationFailed'.
+	 */
+	public final void fireCalculationFailed() {
+		workState.compareAndSet(WS_WORKING, WS_CANCELED);
+	}
 }

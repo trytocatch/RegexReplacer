@@ -183,7 +183,7 @@ public class RegexController extends LatestResultsProvider implements Controller
 		try {
 			workOutResultImpl();
 		} catch (Throwable t) {
-			stopCurrentWorking();
+			fireCalculationFailed();
 			if (resultObserver != null)
 				resultObserver.onResultChanged(
 						null,
