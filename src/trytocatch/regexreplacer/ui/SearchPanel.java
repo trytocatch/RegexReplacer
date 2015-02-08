@@ -32,6 +32,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.event.DocumentEvent;
@@ -41,6 +42,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
+import javax.swing.undo.UndoManager;
 
 import trytocatch.regexreplacer.model.MatchResultInfo;
 import trytocatch.regexreplacer.model.RegexController;
@@ -185,6 +187,7 @@ public class SearchPanel extends JPanel implements ResultObserver {
 		return flag;
 	}
 
+	@SuppressWarnings("serial")
 	private void installListener() {
 		ItemListener flagListener = new ItemListener() {
 			@Override
@@ -245,7 +248,24 @@ public class SearchPanel extends JPanel implements ResultObserver {
 				regexController.setRegexStr(regexArea.getText());
 			}
 		});
-
+		final UndoManager regexAreaundoManager = new UndoManager();
+		regexArea.getDocument().addUndoableEditListener(regexAreaundoManager);
+		regexArea.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "undo");
+		regexArea.getActionMap().put("undo", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (regexAreaundoManager.canUndo())
+					regexAreaundoManager.undo();
+			}
+		});
+		regexArea.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "redo");
+		regexArea.getActionMap().put("redo", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (regexAreaundoManager.canRedo())
+					regexAreaundoManager.redo();
+			}
+		});
 		replaceArea.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
@@ -261,6 +281,24 @@ public class SearchPanel extends JPanel implements ResultObserver {
 			public void changedUpdate(DocumentEvent e) {
 				// needed?
 				regexController.setReplaceExpression(replaceArea.getText());
+			}
+		});
+		final UndoManager replaceAreaUndoManager = new UndoManager();
+		replaceArea.getDocument().addUndoableEditListener(replaceAreaUndoManager);
+		replaceArea.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "undo");
+		replaceArea.getActionMap().put("undo", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (replaceAreaUndoManager.canUndo())
+					replaceAreaUndoManager.undo();
+			}
+		});
+		replaceArea.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "redo");
+		replaceArea.getActionMap().put("redo", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (replaceAreaUndoManager.canRedo())
+					replaceAreaUndoManager.redo();
 			}
 		});
 		resultTable.addMouseListener(new MouseAdapter() {
