@@ -1,9 +1,10 @@
 package trytocatch.regexreplacer.model.expression.funcs;
 
-import trytocatch.regexreplacer.model.expression.ExpressionNode;
 import trytocatch.regexreplacer.model.expression.FuncNode;
+import trytocatch.regexreplacer.model.expression.utils.LogicUtil;
 /**
- * like the Iif in visual basic, return c while a==b, otherwise return d
+ * like the Iif in visual basic, returns c while a==b, 
+ * otherwise returns d(no affect on d even through d is a dynamic function like Seq)
  * @author trytocatch
  * @date Jun 2, 2014
  */
@@ -20,31 +21,7 @@ public class FuncIif extends FuncNode {
 
 	@Override
 	public Object getResultImpl() {
-		Object args0;
-		Object args1;
-		if(args[0] instanceof ExpressionNode)
-			args0 = ((ExpressionNode)args[0]).getResult();
-		else
-			args0 = args[0];
-		if(args[1] instanceof ExpressionNode)
-			args1 = ((ExpressionNode)args[1]).getResult();
-		else
-			args1 = args[1];
-		if (args0 == args1)
-			return args[2];
-		else if (args0 == null || args1 == null)
-			return args[3];
-		else if (args0.getClass() == args1.getClass())
-			return args0.equals(args1) ? args[2] : args[3];
-		else if (args0 instanceof Number && args1 instanceof Number) {
-			Number a = (Number) args0;
-			Number b = (Number) args1;
-			return a.longValue() == b.longValue()
-					&& a.doubleValue() == a.doubleValue() ? args[2]
-					: args[3];
-		} else
-			return args0.toString().equals(args1.toString()) ? args[2]
-					: args[3];
+		return LogicUtil.lenientEquals(args[0], args[1])?args[2]:args[3];
 	}
 	
 	@Override

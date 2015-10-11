@@ -249,7 +249,61 @@ and put the `StrC` into regular expression box
 
 and put the `StrA` into replace expression box
 
-then click 'replace all', you'll get the final result:
+then click 'replace all'(remember to uncheck 'replacement only' first), you'll get the final result:
+```
+Miss Carter is a beautiful girl. Her father died two years ago and her mother made a terrible mistake and left. They began to live a hard life. When she finished middle school, she couldn't go on studying. Her uncle found a job for her...
+```
+
+####7. Replace strings to assigned strings(Use the new function 'Case')
+
+**Original content:** (extract from an examination paper)
+```
+Miss Carter is a beautiful girl. Her father __ two years ago and her mother made a terrible mistake and __. They began to live a hard life. When she __ middle school, she couldn't go on studying. Her uncle found a __ for her...
+```
+**Requirement:** put the answers to the right place
+
+answers:
+```
+1. died
+2. left
+3. finished
+4. job
+...
+```
+
+**Solution:**
+
+put the answers into content box
+
+input a *regular expression*:
+```
+\d+\. (\w+)
+```
+
+input a *replace expression*:
+```
+$Seq(1,1),$(1),
+```
+
+check 'replacement only' then click 'replace all', get the result:
+```
+1,died,2,left,3,finished,4,job,
+```
+add and delete something, then get a new string(marked as 'StrA'):
+```
+$Case($Seq(1,1),1,died,2,left,3,finished,4,job)
+```
+
+Now put the content into content box
+
+input a *replace expression*:
+```
+$(1)
+```
+
+and put the `StrA` into replace expression box
+
+then click 'replace all'(remember to uncheck 'replacement only' first), you'll get the final result:
 ```
 Miss Carter is a beautiful girl. Her father died two years ago and her mother made a terrible mistake and left. They began to live a hard life. When she finished middle school, she couldn't go on studying. Her uncle found a job for her...
 ```

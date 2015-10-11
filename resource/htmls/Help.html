@@ -158,5 +158,32 @@ and put the StrA into <b>replace expression</b> box<br>
 then click 'replace all', you'll get the final result:<br>
 Miss Carter is a beautiful girl. Her father died two years ago and her mother made a terrible mistake and left. They began to live a hard life. When she finished middle school, she couldn't go on studying. Her uncle found a job for her...<br>
 <br>
+<h3>7. Replace strings to assigned strings(Use the new function 'Case')</h3>
+<b>Original content: </b>(extract from an examination paper)<br>
+Miss Carter is a beautiful girl. Her father __ two years ago and her mother made a terrible mistake and __. They began to live a hard life. When she __ middle school, she couldn't go on studying. Her uncle found a __ for her...<br>
+<b>Requirement: </b>put the answers to the right place<br>
+answers:<br>
+1. died<br>
+2. left<br>
+3. finished<br>
+4. job<br>
+...<br>
+<b>Solution:</b><br>
+put the answers into content box<br>
+input a <b>regular expression</b>:<br>
+<pre>\d+\. (\w+)</pre>
+input a <b>replace expression</b>:<br>
+<pre>$Seq(1,1),$(1),</pre>
+check 'replacement only' then click 'replace all', get the result:<br>
+1,died,2,left,3,finished,4,job,<br>
+add and delete something, then get a new string(marked as 'StrA'):<br>
+$Case($Seq(1,1),1,died,2,left,3,finished,4,job)<br>
+now put the content into content box<br>
+input a <b>regular expression</b>:<br>
+<pre>__</pre>
+and put the StrA into <b>replace expression</b> box<br>
+then click 'replace all'(remember to uncheck 'replacement only' first), you'll get the final result:<br>
+Miss Carter is a beautiful girl. Her father died two years ago and her mother made a terrible mistake and left. They began to live a hard life. When she finished middle school, she couldn't go on studying. Her uncle found a job for her...<br>
+<br>
 </BODY>
 </HTML>

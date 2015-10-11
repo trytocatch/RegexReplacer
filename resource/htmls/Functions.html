@@ -80,6 +80,13 @@ replace functions
 <b>Description: </b>if the first parameter equals to the second parameter, then returns the third parameter, otherwise returns the forth parameter. This function is special treated, there is no effect on the unreturned parameter(e.g. function 'Seq')<br>
 <hr>
 <p>
+<b>Function: Case</b><br>
+<b>Parameters: </b>any<br>
+<b>The number of parameters: </b>great than or equal to 3<br>
+<b>Description: </b>A powerful version of Iif, if p1 equals p2, returns p3, if p1 equals p4 returns p5... if p1 equals p(2n) returns p(2n+1), if none of them equals p1, and the number of the parameters is odd, then returns nothing, otherwise returns the last one.<br>
+This function tests the cases from left to right, it will stop once it matches, and has no affect on remaining parameters, even through it is a dynamic function like Seq.<br>
+<hr>
+<p>
 <b>Function: Format</b><br>
 <b>Parameters: </b>the first one is String, any for others<br>
 <b>The number of parameters: </b>great than or equal to 1<br>
