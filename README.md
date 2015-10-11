@@ -298,7 +298,7 @@ Now put the content into content box
 
 input a *replace expression*:
 ```
-$(1)
+__
 ```
 
 and put the `StrA` into replace expression box
