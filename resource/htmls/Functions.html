@@ -137,5 +137,12 @@ e.g. 1. $Format(%f,$Add(3.4))<br>2. $Format(%d,$Add(34))<br>
 <b>Parameters description: </b>1.initial value 2.step increment 3. reset threshold(optional)<br>
 <b>Description: </b>This is a sequence generator, on its initialization or reset, it will generates two or three current value(current initial value, current step increment, current reset threshold(optional)), replace the old values and reset the called times to 0. If there is a reset threshold and the next value will greater than or less than(depends on the sign of the current step increment, note that the decimals may not accurately represents) the current reset threshold, the sequence generator will be reset, the parameters only be read on initialization or reset<br>
 <hr>
+<p>
+<b>Function: Repeat</b><br>
+<b>Parameters: </b>any for the first, the second and third is number<br>
+<b>The number of parameters: </b>2 or 3<br>
+<b>Parameters description: </b>1.string to repeat 2.repeat times 3.max length(optional)<br>
+<b>Description: </b>Generate a new string by repeating the input string for specified times, and if the new string reach the [max length], it will be cut off. [repeat times] can be negative if the [max length] is assigned, and it means to repeat until the max length reached.<br>
+<hr>
 </BODY>
 </HTML>
