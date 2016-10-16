@@ -3,7 +3,7 @@ package trytocatch.regexreplacer.model.expression.funcs;
 import trytocatch.regexreplacer.model.expression.FuncNode;
 /**
  * dynamic repeat<br>
- * repeat the string for some times with the max length.<br>
+ * repeat the string for several times with the max length.<br>
  * read the new value for the first argument at each repeat<br>
  * @author trytocatch
  * @date 2016-10-16

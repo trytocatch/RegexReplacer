@@ -3,7 +3,7 @@ package trytocatch.regexreplacer.model.expression.funcs;
 import trytocatch.regexreplacer.model.expression.FuncNode;
 
 /**
- * repeat the string for some times with the max length
+ * repeat the string for several times with the max length
  * @author trytocatch
  * @date 2016-10-07
  */
