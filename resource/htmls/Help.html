@@ -29,7 +29,7 @@ If you want to write special character, like '$', you should put a escape charac
 If you write nothing in the position of a parameter, it will get an empty string rather than 'null'<br>
 <br>
 The functions in replace expression will be called in order from left to right, you should notice this while you want to use the function 'Ref' or 'StcRef'.<br>
-If function A is the parameter of function B, then A will be called before B be called(but the function 'Iif' is an exception)<br>
+If function A is the parameter of function B, then A will be called before B be called(but the function 'Iif', 'Case', 'DynRepeat' is an exception)<br>
 <br>
 <b>Notices: </b><br>
 1. For the functions:Add, Subtract, Multiply, Divide, Mod, Seq, if there is a decimal in their parameters, the result will be a decimal too, otherwise returns a integer(in fact, it's a 'Long'), even for Divide. Empty string and 'null' will be treated as 0, '1.0' and '1.' will be treated as decimal<br>

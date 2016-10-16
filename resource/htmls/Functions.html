@@ -142,7 +142,17 @@ e.g. 1. $Format(%f,$Add(3.4))<br>2. $Format(%d,$Add(34))<br>
 <b>Parameters: </b>any for the first, the second and third is number<br>
 <b>The number of parameters: </b>2 or 3<br>
 <b>Parameters description: </b>1.string to repeat 2.repeat times 3.max length(optional)<br>
-<b>Description: </b>Generate a new string by repeating the input string for specified times, and if the new string reach the [max length], it will be cut off. [repeat times] can be negative if the [max length] is assigned, and it means to repeat until the max length reached.<br>
+<b>Description: </b>Generate a new string by repeating the input string for specified times, and if the new string reach the [max length], it will be cut off. [repeat times] can be negative if the [max length] is assigned, and it means to repeat until the max length reached. Refer to 'DynRepeat'<br>
+<hr>
+<p>
+<b>Function: DynRepeat</b><br>
+<b>Parameters: </b>any for the first(dynamic one is OK, e.g. Seq, AbsRow), the second and third is number<br>
+<b>The number of parameters: </b>2 or 3<br>
+<b>Parameters description: </b>1.string to repeat(dynamic one is OK) 2.repeat times 3.max length(optional)<br>
+<b>Description: </b>Refer to 'Repeat', the difference is: 'DynRepeat' will read the new value for the first argument at each repeat<br>
+e.g.<br>
+$Repeat($Seq(1,1),5) will get '11111'<br>
+$DynRepeat($Seq(1,1),5) will get '12345'<br>
 <hr>
 </BODY>
 </HTML>
