@@ -1,18 +1,18 @@
-#RegexReplacer
+# RegexReplacer
 
 中文介绍请看这：http://www.cnblogs.com/trytocatch/p/RegexReplacer.html
 
 [Download the latest executable jar.](https://github.com/trytocatch/RegexReplacer/raw/master/executable%20jar/RegexReplacer.jar)
 
-##What it is
+## What it is
 This is a desktop application(java swing) to make complex text replacements with regular expression.
-####Characteristic:
+#### Characteristic:
 
 * It introduced replace functions, you can make some complex replacements with it, if it doesn't meet your needs, you can also write your own function(refer to 'custom function guidance').
 * Shows results in real time, you can pick some of them to make replacements, or just view what's matched.
 * You can just take the matched content(sometimes it's very useful).
 
-##Replace expression
+## Replace expression
 
 In the replace expression, you can write replace function inside the plain string(they will be concatenated into a new string)
 
@@ -31,7 +31,7 @@ The functions in replace expression will be called in order from left to right, 
 
 If function A is the parameter of function B, then A will be called before B be called(but the function 'Iif' is an exception)
 
-####Notices: 
+#### Notices: 
 
 * For the functions:Add, Subtract, Multiply, Divide, Mod, Seq, if there is a decimal in their parameters, the result will be a decimal too, otherwise returns a integer(in fact, it's a 'Long'), even for Divide. Empty string and 'null' will be treated as 0, '1.0' and '1.' will be treated as decimal
 
@@ -61,15 +61,15 @@ No 3:
 ...
 ```
 
-##Cases:
+## Cases:
 
-####1. Contribute to log analysis
+#### 1. Contribute to log analysis
 
 **Requirement:** In general, the log contains various informations, sometimes you just need one type of them, and it's difficult to visualize the interested content even with the UE, you may have to view the items one by one with the 'next' button.
 
 **Solution:** Copy the log to the content box, input a regular expression to match the interested content, the result table will display them. Then check the 'return focus' and click one result, the cursor will be located to the right place in content box, you can conveniently get the context. Or you can just pick out all the interested content(put '$(0)' in replace expression box and check 'replacement only', then click the button 'replace all').
 
-####2. capturing group and arithmetic
+#### 2. capturing group and arithmetic
 
 **Original content:**
 ```
@@ -97,7 +97,7 @@ No 3:
 $(1)*$(2)=$*($(1),$(2))
 ```
 
-####3. Sequence
+#### 3. Sequence
 
 **Original content:**
 ```
@@ -125,7 +125,7 @@ c=54
 $Seq(10,10). 
 ```
 
-####4. Sequence 2
+#### 4. Sequence 2
 
 ps: This case is complex and meaningless.Just to show that how complex things it could generate.
 
@@ -148,7 +148,7 @@ ps: This case is complex and meaningless.Just to show that how complex things it
 $Iif($Seq[n](1,1,$Seq[m](1,1,9)),1,,	)$StcRef(n) * $StcRef(m) = $*($StcRef(n),$StcRef(m))$Iif($StcRef(n),$StcRef(m),
 ,)
 ```
-####5. Case conversion
+#### 5. Case conversion
 
 **Original content:** a snippet from a document
 ```
@@ -182,7 +182,7 @@ public static final byte $Upper($(0)) = $Iif[tv]($*[v]($StcRef(tv),2),0,1,$StcRe
 
 check the check box 'replacement only', then click the button 'replace all'
 
-####6. Replace strings to assigned strings(complex)
+#### 6. Replace strings to assigned strings(complex)
 
 **Original content:** (extract from an examination paper)
 ```
@@ -254,7 +254,7 @@ then click 'replace all'(remember to uncheck 'replacement only' first), you'll g
 Miss Carter is a beautiful girl. Her father died two years ago and her mother made a terrible mistake and left. They began to live a hard life. When she finished middle school, she couldn't go on studying. Her uncle found a job for her...
 ```
 
-####7. Replace strings to assigned strings(Use the new function 'Case')
+#### 7. Replace strings to assigned strings(Use the new function 'Case')
 
 **Original content:** (extract from an examination paper)
 ```
