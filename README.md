@@ -23,7 +23,7 @@ $function name[alias](arg1,arg2,arg3)
 ```
 ps: the 'alias' is related to function 'Ref' and 'StcRef'.
 
-If you want to write special character, like '$', you should put a escape character '\' ahead of it. 
+If you want to write special character, like '$', you should put a escape character '\\' ahead of it. 
 
 If you write nothing in the position of a parameter, it will get an empty string rather than 'null'.
 
