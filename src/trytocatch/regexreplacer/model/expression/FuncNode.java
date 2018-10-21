@@ -44,9 +44,10 @@ public abstract class FuncNode extends ExpressionNode {
 		hasDynamicNode = false;
 		for (Object o : this.args) {
 			if (o instanceof ExpressionNode) {
-				if (((ExpressionNode) o).isCacheAvailable() == false)
+				if (((ExpressionNode) o).isCacheAvailable() == false){
 					hasDynamicNode = true;
-				break;
+					break;
+				}
 			}
 		}
 	}
