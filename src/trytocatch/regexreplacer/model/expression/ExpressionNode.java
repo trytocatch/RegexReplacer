@@ -18,17 +18,23 @@ public abstract class ExpressionNode implements ResetObserver {
 	}
 	
 	public Object getResult() {
-		if (isCacheAvailable() && getResultCache() != null)
-			return getResultCache();
-		else
-			return cache = getResultImpl();
+		return getResultCombine(true);
 	}
 	
 	public Object getResultWithoutCacheUpdate() {
+		return getResultCombine(false);
+	}
+
+	private Object getResultCombine(boolean updateCache) {
 		if (isCacheAvailable() && getResultCache() != null)
 			return getResultCache();
-		else
-			return getResultImpl();
+		else {
+			Object result = normalizeResult(getResultImpl());
+			if(updateCache){
+				cache = result;
+			}
+			return result;
+		}
 	}
 
 	public Object getResultCache() {
@@ -52,5 +58,9 @@ public abstract class ExpressionNode implements ResetObserver {
 			return o.toString();
 		else
 			return "";
+	}
+
+	public static Object normalizeResult(Object obj){
+		return obj instanceof ExpressionNode ? obj.toString():obj;
 	}
 }
