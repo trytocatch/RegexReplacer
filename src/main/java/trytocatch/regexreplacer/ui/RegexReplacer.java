@@ -3,19 +3,7 @@ package trytocatch.regexreplacer.ui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 import javax.swing.undo.UndoManager;
 
 import trytocatch.swingplus.text.LineLabel;
@@ -36,10 +24,22 @@ public class RegexReplacer {
 	
 	@SuppressWarnings({ "deprecation", "serial" })
 	private static void start(){
+		Class<?> lookAndFeel = null;
 		try {
-			UIManager
-					.setLookAndFeel(new com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel());
-		} catch (UnsupportedLookAndFeelException e) {
+			lookAndFeel = Class.forName("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException e) {
+			try {
+				lookAndFeel = Class.forName("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+			} catch (ClassNotFoundException ex) {
+			}
+		}
+		if(lookAndFeel != null){
+			try {
+				UIManager.setLookAndFeel((LookAndFeel) lookAndFeel.newInstance());
+			} catch (InstantiationException ignored) {
+			} catch (IllegalAccessException ignored) {
+			} catch (UnsupportedLookAndFeelException ignored) {
+			}
 		}
 		JFrame f = new JFrame(StrUtils.getStr("RegexReplacer.title"));
 		JTextArea jta = new JTextArea(10, 20);

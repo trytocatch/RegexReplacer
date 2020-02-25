@@ -27,7 +27,7 @@ public class FuncChar extends FuncNode {
 			i =((Number)realArgs[0]).intValue();
 		else
 			i = Integer.parseInt(realArgs[0].toString());
-		return new Character((char)i);
+		return (char) i;
 	}
 
 }
