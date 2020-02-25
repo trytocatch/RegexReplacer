@@ -31,7 +31,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>trytocatch.regexreplacer.ui.RegexReplacer</mainClass>
+							<mainClass>com.github.trytocatch.regexreplacer.ui.RegexReplacer</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

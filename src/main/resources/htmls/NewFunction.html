@@ -13,12 +13,12 @@ custom function guidance
 
 <BODY BGCOLOR="lightgray">
 <h2>Custom function guidance</h2>
-At first, create a java project, and import this jar, add it to build path, then create a class extends 'trytocatch.regexreplacer.model.expression.FuncNode', and this class must be inside the package 'trytocatch.regexreplacer.model.expression.funcs'<br>
+At first, create a java project, and import this jar, add it to build path, then create a class extends 'com.github.trytocatch.regexreplacer.model.expression.FuncNode', and this class must be inside the package 'com.github.trytocatch.regexreplacer.model.expression.funcs'<br>
 here is a example:<br>
 <pre>
-package trytocatch.regexreplacer.model.expression.funcs;
+package com.github.trytocatch.regexreplacer.model.expression.funcs;
 
-import trytocatch.regexreplacer.model.expression.FuncNode;
+import com.github.trytocatch.regexreplacer.model.expression.FuncNode;
 
 public class FuncXXX extends FuncNode {
 	public FuncXXX(Object[] args) {
@@ -51,7 +51,7 @@ Description:<br>
 <br>
 7. For some reasons, even though you didn't pass any parameter for a function in you replace expression, there is a empty string be actually passed in. So you should never write this code 'return count == 0' in check function 'checkArgsLength'.<br>
 <br>
-In the end, compile this class and put the file 'FuncXXX.class' into the jar file(put it into the director 'trytocatch/regexreplacer/model/expression/funcs', jar is a zip formatted file, it's easy to modify).<br>
+In the end, compile this class and put the file 'FuncXXX.class' into the jar file(put it into the director 'com/github/trytocatch/regexreplacer/model/expression/funcs', jar is a zip formatted file, it's easy to modify).<br>
 Now every thing has done, you can execute the new jar and use your own function in replace expression.<br>
 </BODY>
 </HTML>

@@ -13,13 +13,13 @@
 
 <BODY BGCOLOR="lightgray">
 <h2>自定义函数说明</h2>
-如果想实现自己的函数，请先创建一个项目，引入该jar包，然后继承trytocatch.regexreplacer.model.expression.FuncNode类，并且该类必需在trytocatch.regexreplacer.model.expression.funcs包下<br>
+如果想实现自己的函数，请先创建一个项目，引入该jar包，然后继承com.github.trytocatch.regexreplacer.model.expression.FuncNode类，并且该类必需在com.github.trytocatch.regexreplacer.model.expression.funcs包下<br>
 <br>
 参考如下：<br>
 <pre>
-package trytocatch.regexreplacer.model.expression.funcs;
+package com.github.trytocatch.regexreplacer.model.expression.funcs;
 
-import trytocatch.regexreplacer.model.expression.FuncNode;
+import com.github.trytocatch.regexreplacer.model.expression.FuncNode;
 
 public class FuncXXX extends FuncNode {
 	public FuncXXX(Object[] args) {
@@ -52,6 +52,6 @@ public class FuncXXX extends FuncNode {
 <br>
 注意：由于一些原因，即使表达式中未给函数传参数，实际上也会传入一个空字符串，所以判断的时候不要使用return count == 0。<br>
 <br>
-编写好后，将该类的class文件放到jar包（jar其实是一个zip文件，可以修改）里的trytocatch/regexreplacer/model/expression/funcs目录下，运行新的jar，就可以使用自已定义的函数了
+编写好后，将该类的class文件放到jar包（jar其实是一个zip文件，可以修改）里的com/github/trytocatch/regexreplacer/model/expression/funcs目录下，运行新的jar，就可以使用自已定义的函数了
 </BODY>
 </HTML>
