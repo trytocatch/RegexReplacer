@@ -8,12 +8,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Enumeration;
@@ -157,7 +152,7 @@ public class SearchPanel extends JPanel implements ResultObserver {
 		divertFocus.setToolTipText(StrUtils
 				.getStr("SearchPanel.returnFocus_tip"));
 
-		updateNowBtn = new JButton(StrUtils.getStr("SearchPanel.udpate"));
+		updateNowBtn = new JButton(StrUtils.getStr("SearchPanel.update"));
 		updateNowBtn.setEnabled(false);
 		replaceSelected = new JButton(
 				StrUtils.getStr("SearchPanel.replaceSelected"));
@@ -249,8 +244,9 @@ public class SearchPanel extends JPanel implements ResultObserver {
 			}
 		});
 		final UndoManager regexAreaundoManager = new UndoManager();
+		int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 		regexArea.getDocument().addUndoableEditListener(regexAreaundoManager);
-		regexArea.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "undo");
+		regexArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, mask), "undo");
 		regexArea.getActionMap().put("undo", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -258,7 +254,8 @@ public class SearchPanel extends JPanel implements ResultObserver {
 					regexAreaundoManager.undo();
 			}
 		});
-		regexArea.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "redo");
+		regexArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, mask), "redo");
+		regexArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, mask | InputEvent.SHIFT_DOWN_MASK), "redo");
 		regexArea.getActionMap().put("redo", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -285,7 +282,7 @@ public class SearchPanel extends JPanel implements ResultObserver {
 		});
 		final UndoManager replaceAreaUndoManager = new UndoManager();
 		replaceArea.getDocument().addUndoableEditListener(replaceAreaUndoManager);
-		replaceArea.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "undo");
+		replaceArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, mask), "undo");
 		replaceArea.getActionMap().put("undo", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -293,7 +290,8 @@ public class SearchPanel extends JPanel implements ResultObserver {
 					replaceAreaUndoManager.undo();
 			}
 		});
-		replaceArea.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "redo");
+		replaceArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, mask), "redo");
+		replaceArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, mask | InputEvent.SHIFT_DOWN_MASK), "redo");
 		replaceArea.getActionMap().put("redo", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

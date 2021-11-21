@@ -49,6 +49,7 @@ public class LineLabel extends JComponent {
 		setFont(new Font(Font.MONOSPACED, Font.PLAIN, this.jTextComponent
 				.getFont().getSize()));
 		setOpaque(true);
+		setBackground(new Color(238,238,238));
 		setRowCount(this.jTextComponent.getDocument().getDefaultRootElement()
 				.getElementCount());
 		documentListener = new DocumentListener() {

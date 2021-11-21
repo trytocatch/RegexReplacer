@@ -1,7 +1,9 @@
 package com.github.trytocatch.regexreplacer.ui;
 
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 import javax.swing.undo.UndoManager;
@@ -22,31 +24,33 @@ public class RegexReplacer {
 		});
 	}
 	
-	@SuppressWarnings({ "deprecation", "serial" })
 	private static void start(){
-		Class<?> lookAndFeel = null;
-		try {
-			lookAndFeel = Class.forName("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-		} catch (ClassNotFoundException e) {
+		if(!System.getProperty("os.name","").toLowerCase().startsWith("mac")) {
+			Class<?> lookAndFeel = null;
 			try {
-				lookAndFeel = Class.forName("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-			} catch (ClassNotFoundException ex) {
+				lookAndFeel = Class.forName("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			} catch (ClassNotFoundException e) {
+				try {
+					lookAndFeel = Class.forName("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+				} catch (ClassNotFoundException ex) {
+				}
+			}
+			if (lookAndFeel != null) {
+				try {
+					UIManager.setLookAndFeel((LookAndFeel) lookAndFeel.newInstance());
+				} catch (InstantiationException ignored) {
+				} catch (IllegalAccessException ignored) {
+				} catch (UnsupportedLookAndFeelException ignored) {
+				}
 			}
 		}
-		if(lookAndFeel != null){
-			try {
-				UIManager.setLookAndFeel((LookAndFeel) lookAndFeel.newInstance());
-			} catch (InstantiationException ignored) {
-			} catch (IllegalAccessException ignored) {
-			} catch (UnsupportedLookAndFeelException ignored) {
-			}
-		}
-		JFrame f = new JFrame(StrUtils.getStr("RegexReplacer.title"));
+		final JFrame f = new JFrame(StrUtils.getStr("RegexReplacer.title"));
 		JTextArea jta = new JTextArea(10, 20);
 		jta.setLineWrap(true);
 		final UndoManager undoManager = new UndoManager();
+		int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 		jta.getDocument().addUndoableEditListener(undoManager);
-		jta.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "undo");
+		jta.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, mask), "undo");
 		jta.getActionMap().put("undo", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -54,7 +58,8 @@ public class RegexReplacer {
 					undoManager.undo();
 			}
 		});
-		jta.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "redo");
+		jta.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, mask), "redo");
+		jta.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, mask | InputEvent.SHIFT_DOWN_MASK), "redo");
 		jta.getActionMap().put("redo", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -101,6 +106,13 @@ public class RegexReplacer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				HelpFrame.showNewFunctionHelp();
+			}
+		}));
+		jm.add(new JMenuItem(new AbstractAction(StrUtils
+				.getStr("RegexReplacer.about")) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AboutDialog(f).setVisible(true);
 			}
 		}));
 		jmb.add(jm);

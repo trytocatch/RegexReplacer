@@ -2,8 +2,6 @@
 
 中文介绍请看这：http://www.cnblogs.com/trytocatch/p/RegexReplacer.html
 
-[Download the latest executable jar.](https://github.com/trytocatch/RegexReplacer/raw/master/executable%20jar/RegexReplacer.jar)
-
 ## What it is
 This is a desktop application(java swing) to make complex text replacements with regular expression.
 #### Characteristic:
